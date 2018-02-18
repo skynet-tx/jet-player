@@ -41,12 +41,22 @@ class App extends Component {
 
 	handleNext = () => {
 		const audio = ReactDOM.findDOMNode(this.refs.audio);
+		let isPaused = audio.paused;
 		this.props.next(audio);
+		// Set autoplay for player
+		if(!isPaused) {
+			setTimeout(() => {this.props.play(audio)}, 500);
+		}
 	};
 
 	handlePrevious = () => {
 		const audio = ReactDOM.findDOMNode(this.refs.audio);
+		let isPaused = audio.paused;
 		this.props.previous(audio);
+		// Set autoplay for player
+		if(!isPaused) {
+			setTimeout(() => {this.props.play(audio)}, 500);
+		}
 	};
 
 	handleVolumeChange = (volume) => {
@@ -118,9 +128,6 @@ class App extends Component {
 
 					<ControlsPanel
 						isPlaying={isPlaying}
-						percent={percent * 100}
-						progress={progress}
-						duration={duration}
 						disableChange={songs.length <= 1}
 						onPlay={this.handlePlay}
 						onNext={this.handleNext}

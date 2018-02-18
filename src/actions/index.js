@@ -5,7 +5,7 @@ import * as types from '../constants/ActionTypes'
 import data from '../store/songsList.json';
 
 export function retrieveSongs() {
-	// This could be written as a thunk or saga
+	// This could be written as list of songs
 	return { type: types.INITIALIZE, songs: data.songs }
 }
 

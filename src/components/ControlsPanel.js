@@ -41,7 +41,7 @@ export default class ControlsPanel extends Component {
 				<ControlButton
 					size="medium"
 					mode="next"
-					onClick={this.props.onNext}
+					onClick={this.props.onPrevious}
 					disabled={this.props.disableChange}
 				/>
 				<ControlButton
@@ -56,7 +56,7 @@ export default class ControlsPanel extends Component {
 				<ControlButton
 					size="medium"
 					mode="previous"
-					onClick={this.props.onPrevious}
+					onClick={this.props.onNext}
 					disabled={this.props.disableChange}
 				/>
 				<Segment inverted

@@ -46,7 +46,7 @@ function getAdjacentSong(songs, startIndex, direction) {
 }
 
 function getAudioState(audio) {
-	var test = {
+	var audioState = {
 		isPlaying: !audio.paused,
 		percent: audio.currentTime / audio.duration,
 		progress: audio.buffered,
@@ -55,7 +55,7 @@ function getAudioState(audio) {
 		error: audio.error
 	}
 
-	return test;
+	return audioState;
 }
 
 export default function audio(state = initialState, action) {
