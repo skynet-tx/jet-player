@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
-import {AudioCore} from '../components';
+import {AudioCore, ControlsPanel} from '../components';
 
 import {Container, Header, Icon, Segment} from 'semantic-ui-react'
 
@@ -96,6 +96,7 @@ class App extends Component {
 
 		return (
 			<Container text>
+				<Segment.Group>
 				<Segment inverted>
 					<Header inverted color='blue' as='h2' icon textAlign='center'>
 						<Icon inverted name='music' circular color="blue"/>
@@ -114,7 +115,25 @@ class App extends Component {
 						onError={this.handleError}
 						onEnded={this.handleEnd}
 						onLoadedData={this.handleLoadedData} />
+
+					<ControlsPanel
+						isPlaying={isPlaying}
+						percent={percent * 100}
+						progress={progress}
+						duration={duration}
+						disableChange={songs.length <= 1}
+						onPlay={this.handlePlay}
+						onNext={this.handleNext}
+						onPrevious={this.handlePrevious}
+						isFavorite={song.favorite}
+						isRepeating={isRepeating}
+						isLooping={isLooping}
+						onTrackClick={this.handleTrackClick}
+						onToggleRepeat={this.handleToggleRepeat}
+						onToggleFavorite={this.handleToggleFavorite}
+						onToggleLoop={this.handleToggleLoop}/>
 				</Segment>
+				</Segment.Group>
 			</Container>
 		);
 	}
