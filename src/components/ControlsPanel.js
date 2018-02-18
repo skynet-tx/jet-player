@@ -30,6 +30,7 @@ export default class ControlsPanel extends Component {
 
 	render() {
 		const playMode = this.props.isPlaying ? "pause" : "play";
+		let heartStyle = this.props.isFavorite ? 'pink' : 'black';
 
 		return (
 			<Segment
@@ -71,7 +72,7 @@ export default class ControlsPanel extends Component {
 							<Icon name="share alternate" />
 						</Button>
 						<Button icon inverted onClick={this.props.onToggleFavorite}>
-							<Icon name="like" />
+							<Icon color={heartStyle} name="like" />
 						</Button>
 					</Button.Group>
 				</Segment>

@@ -2,21 +2,21 @@
  "songs": [
     {
       "id": 1,
-      "audioFile": "/public/samples_mp3/01_Bird_of_Prey.mp3",
+      "audioFile": "/samples_mp3/01_Bird_of_Prey.mp3",
       "title": "Bird of Prey",
       "artist": "The Doors",
       "favorite": true
     },
     {
       "id": 2,
-      "audioFile": "/public/samples_mp3/02_Love_Her_Madly.mp3",
+      "audioFile": "/samples_mp3/02_Love_Her_Madly.mp3",
       "title": "Love Her Madly",
       "artist": "The Doors",
       "favorite": false
     },
     {
       "id": 3,
-      "audioFile": "/public/samples_mp3/03_Riders_on_the_Storm.mp3",
+      "audioFile": "/samples_mp3/03_Riders_on_the_Storm.mp3",
       "title": "Riders on the Storm",
       "artist": "The Doors",
       "favorite": true
