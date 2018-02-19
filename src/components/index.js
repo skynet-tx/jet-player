@@ -4,9 +4,12 @@
 import AudioCore from './AudioCore'
 import ControlsPanel from './ControlsPanel'
 import ControlButton from './ControlButton'
+import AudioInformationPanel from './AudioInformationPanel'
+
 
 export {
 	AudioCore,
 	ControlsPanel,
-	ControlButton
+	ControlButton,
+	AudioInformationPanel
 }

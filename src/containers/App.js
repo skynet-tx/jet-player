@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
-import {AudioCore, ControlsPanel} from '../components';
+import {AudioCore, ControlsPanel, AudioInformationPanel} from '../components';
 
 import {Container, Header, Icon, Segment} from 'semantic-ui-react'
 
@@ -40,22 +40,26 @@ class App extends Component {
 	};
 
 	handleNext = () => {
-		const audio = ReactDOM.findDOMNode(this.refs.audio);
+		const audio  = ReactDOM.findDOMNode(this.refs.audio);
 		let isPaused = audio.paused;
 		this.props.next(audio);
 		// Set autoplay for player
-		if(!isPaused) {
-			setTimeout(() => {this.props.play(audio)}, 500);
+		if (!isPaused) {
+			setTimeout(() => {
+				this.props.play(audio)
+			}, 500);
 		}
 	};
 
 	handlePrevious = () => {
-		const audio = ReactDOM.findDOMNode(this.refs.audio);
+		const audio  = ReactDOM.findDOMNode(this.refs.audio);
 		let isPaused = audio.paused;
 		this.props.previous(audio);
 		// Set autoplay for player
-		if(!isPaused) {
-			setTimeout(() => {this.props.play(audio)}, 500);
+		if (!isPaused) {
+			setTimeout(() => {
+				this.props.play(audio)
+			}, 500);
 		}
 	};
 
@@ -72,7 +76,7 @@ class App extends Component {
 	};
 
 	handleTrackClick = (percent) => {
-		this.props.updatePosition(ReactDOM.findDOMNode(this.refs.audio), percent/100);
+		this.props.updatePosition(ReactDOM.findDOMNode(this.refs.audio), percent / 100);
 	};
 
 	handleEnd = () => {
@@ -107,15 +111,15 @@ class App extends Component {
 		return (
 			<Container text>
 				<Segment.Group>
-				<Segment inverted>
-					<Header inverted color='blue' as='h2' icon textAlign='center'>
-						<Icon inverted name='music' circular color="blue"/>
-						<Header.Content>
-							JET PLAYER
-						</Header.Content>
-					</Header>
-				</Segment>
-				<Segment inverted>
+					<Segment inverted>
+						<Header inverted color='blue' as='h2' icon textAlign='center'>
+							<Icon inverted name='music' circular color="blue"/>
+							<Header.Content>
+								JET PLAYER
+							</Header.Content>
+						</Header>
+					</Segment>
+					{/*@todo player status bar*/}
 					<AudioCore
 						ref="audio"
 						autoplay={false}
@@ -124,7 +128,7 @@ class App extends Component {
 						onTimeupdate={this.handleTimeupdate}
 						onError={this.handleError}
 						onEnded={this.handleEnd}
-						onLoadedData={this.handleLoadedData} />
+						onLoadedData={this.handleLoadedData}/>
 
 					<ControlsPanel
 						isPlaying={isPlaying}
@@ -139,7 +143,19 @@ class App extends Component {
 						onToggleRepeat={this.handleToggleRepeat}
 						onToggleFavorite={this.handleToggleFavorite}
 						onToggleLoop={this.handleToggleLoop}/>
-				</Segment>
+
+					<AudioInformationPanel
+						songID={song.id}
+						title={song.title}
+						artist={song.artist}
+						volume={volume}
+						hasError={error != null}
+						onNext={this.handleNext}
+						onPrevious={this.handlePrevious}
+						onVolumeChange={this.handleVolumeChange}
+					/>
+					{/*@todo player search bar*/}
+					{/*@todo player playlist*/}
 				</Segment.Group>
 			</Container>
 		);
