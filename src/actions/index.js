@@ -41,6 +41,18 @@ export function previous(audio) {
 	return { type: types.PREVIOUS, audio }
 }
 
+
+export function picksong(audio, newAudioId) {
+	resetAudio(audio);
+	// console.log("newAudioId ....", newAudioId);
+	let data = {
+		audio: audio,
+		newAudioId: newAudioId
+	};
+
+	return { type: types.PICKSONG,  data}
+}
+
 export function updateVolume(audio, volume) {
 	audio.volume = volume/100;
 	return { type: types.UPDATE_VOLUME, volume }

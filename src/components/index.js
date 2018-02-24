@@ -6,6 +6,7 @@ import ControlsPanel from './ControlsPanel'
 import ControlButton from './ControlButton'
 import AudioInformationPanel from './AudioInformationPanel'
 import ProgressBar from './ProgressBar'
+import Playlist from './Playlist'
 
 
 export {
@@ -13,5 +14,6 @@ export {
 	ControlsPanel,
 	ControlButton,
 	AudioInformationPanel,
-	ProgressBar
+	ProgressBar,
+	Playlist
 }

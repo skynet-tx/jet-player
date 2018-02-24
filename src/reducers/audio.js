@@ -2,7 +2,7 @@
  * Created by skynetsaa on 17.02.18.
  */
 import {
-	INITIALIZE, ERROR,
+	INITIALIZE, ERROR, PICKSONG,
 	UPDATE_VOLUME, NEXT, PREVIOUS,
 	PLAY, SET_TIME, SET_PROGRESS,
 	TOGGLE_FAVORITE, TOGGLE_REPEAT,
@@ -26,6 +26,7 @@ const initialState = {
 	repeat: false,
 	songs: [],
 	currentID: null,
+	pickedSongId: null,
 	defaultSong: {
 		"id": -1,
 		"audioFile": null,
@@ -79,6 +80,12 @@ export default function audio(state = initialState, action) {
 				currentID: getAdjacentSong(state.songs, getSongIndex(state.songs, state.currentID), -1),
 				...getAudioState(action.audio)
 			};
+		case PICKSONG:
+			return {
+				...state,
+				currentID: Number(action.data.newAudioId),
+				...getAudioState(action.data.audio)
+			}
 		case UPDATE_VOLUME:
 			return {...state, volume: action.volume };
 		case SET_TIME:

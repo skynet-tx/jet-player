@@ -20,6 +20,34 @@
       "title": "Riders on the Storm",
       "artist": "The Doors",
       "favorite": true
-    }
+    },
+   {
+     "id": 4,
+     "audioFile": "/samples_mp3/04 Orange Country Suite.mp3",
+     "title": "Orange Country Suite",
+     "artist": "The Doors",
+     "favorite": false
+   },
+   {
+     "id": 5,
+     "audioFile": "/samples_mp3/Another Brick In The Wall (Part 2).mp3",
+     "title": "Another Brick In The Wall (Part 2)",
+     "artist": "Pink Floyd",
+     "favorite": false
+   },
+   {
+     "id": 6,
+     "audioFile": "/samples_mp3/Astronomy Domine.mp3",
+     "title": "Astronomy Domine",
+     "artist": "Pink Floyd",
+     "favorite": false
+   },
+   {
+     "id": 7,
+     "audioFile": "/samples_mp3/Marooned.mp3",
+     "title": "Marooned",
+     "artist": "Pink Floyd",
+     "favorite": false
+   }
   ]
 }

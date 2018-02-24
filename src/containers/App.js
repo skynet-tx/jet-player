@@ -10,7 +10,8 @@ import {
 	AudioCore,
 	ControlsPanel,
 	AudioInformationPanel,
-	ProgressBar
+	ProgressBar,
+	Playlist
 } from '../components';
 
 import {Container, Header, Icon, Segment} from 'semantic-ui-react'
@@ -73,6 +74,20 @@ class App extends Component {
 		}
 	};
 
+	handlePickSong = (eve, data) => {
+		var newAudioId = data.children[0].key;
+		const audio  = ReactDOM.findDOMNode(this.refs.audio);
+		let isPaused = audio.paused;
+
+		this.props.picksong(audio, newAudioId);
+		// Set autoplay for player
+		if (!isPaused) {
+			setTimeout(() => {
+				this.props.play(audio)
+			}, 500);
+		}
+	};
+
 	handleVolumeChange = (volume) => {
 		this.props.updateVolume(ReactDOM.findDOMNode(this.refs.audio), volume);
 	};
@@ -88,6 +103,10 @@ class App extends Component {
 	handleTrackClick = (percent) => {
 		this.props.updatePosition(ReactDOM.findDOMNode(this.refs.audio), percent / 100);
 	};
+
+	handlePlaylist = () => {
+		this.props.retrieveSongs();
+	}
 
 	handleEnd = () => {
 		const audio = ReactDOM.findDOMNode(this.refs.audio);
@@ -165,12 +184,13 @@ class App extends Component {
 						duration={duration}
 						percent={percent}
 						hasError={error != null}
-						onNext={this.handleNext}
-						onPrevious={this.handlePrevious}
 						onVolumeChange={this.handleVolumeChange}
 					/>
 					{/*@todo player search bar*/}
-					{/*@todo player playlist*/}
+					<Playlist
+						getPlaylist={songs}
+						onSongChange={this.handlePickSong}
+					/>
 				</Segment.Group>
 			</Container>
 		);

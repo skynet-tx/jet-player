@@ -2,7 +2,6 @@
  * Created by skynetsaa on 24.02.18.
  */
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import Slider from 'rc-slider';
 
 import {Segment,Progress} from 'semantic-ui-react'
@@ -20,7 +19,7 @@ const VolumeHandle = (props) => {
 	);
 };
 
-class ProgressBar extends Component {
+export default class ProgressBar extends Component {
 
 	handleProgressChange = (value) => {
 		if (isFunction(this.props.onChangeProgress)) {
@@ -42,5 +41,3 @@ class ProgressBar extends Component {
 		)
 	}
 }
-
-export default ProgressBar;
