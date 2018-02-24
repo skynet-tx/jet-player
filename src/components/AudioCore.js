@@ -58,7 +58,10 @@ export default class AudioCore extends Component {
 	addListener = (event, func) => {
 		var audio = ReactDOM.findDOMNode(this.refs.audio);
 		audio.addEventListener(event, partialRight(this.handler, func));
-		this.state.listeners.push({event: event, func: func});
+
+		this.setState({
+			listeners: [...this.state.listeners, {event: event, func: func}]
+		});
 	}
 
 	removeAllListeners = () => {

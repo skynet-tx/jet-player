@@ -7,6 +7,7 @@ export const PAUSE = 'PAUSE';
 export const NEXT = 'NEXT';
 export const PREVIOUS = 'PREVIOUS';
 export const PICKSONG = 'PICKSONG';
+export const LIST_FILTER = 'LIST_FILTER';
 export const ERROR = 'ERROR';
 export const UPDATE_BUFFER = 'UPDATE_BUFFER';
 export const UPDATE_VOLUME = 'UPDATE_VOLUME';

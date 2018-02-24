@@ -11,13 +11,16 @@ import {
 	ControlsPanel,
 	AudioInformationPanel,
 	ProgressBar,
-	Playlist
+	Playlist,
+	SearchForm
 } from '../components';
 
 import {Container, Header, Icon, Segment} from 'semantic-ui-react'
 
 import * as AudioActions from '../actions'
 import find from 'lodash/find';
+
+let timer = null;
 
 class App extends Component {
 
@@ -28,6 +31,11 @@ class App extends Component {
 		this.props.setTime(ReactDOM.findDOMNode(this.refs.audio));
 		this.props.retrieveSongs();
 	}
+
+	handleFilterSongs = (searchTerm) => {
+		const audio  = ReactDOM.findDOMNode(this.refs.audio);
+		this.props.filterSongs(audio, searchTerm);
+	};
 
 	handleProgress = () => {
 		this.props.setProgress(ReactDOM.findDOMNode(this.refs.audio));
@@ -56,8 +64,9 @@ class App extends Component {
 		this.props.next(audio);
 		// Set autoplay for player
 		if (!isPaused) {
-			setTimeout(() => {
-				this.props.play(audio)
+			timer = setTimeout(() => {
+				this.props.play(audio);
+				clearTimeout(timer);
 			}, 500);
 		}
 	};
@@ -68,22 +77,23 @@ class App extends Component {
 		this.props.previous(audio);
 		// Set autoplay for player
 		if (!isPaused) {
-			setTimeout(() => {
-				this.props.play(audio)
+			timer = setTimeout(() => {
+				this.props.play(audio);
+				clearTimeout(timer);
 			}, 500);
 		}
 	};
 
-	handlePickSong = (eve, data) => {
-		var newAudioId = data.children[0].key;
+	handlePickSong = (newAudioId) => {
 		const audio  = ReactDOM.findDOMNode(this.refs.audio);
-		let isPaused = audio.paused;
+		const isPaused = audio.paused;
 
 		this.props.picksong(audio, newAudioId);
 		// Set autoplay for player
 		if (!isPaused) {
-			setTimeout(() => {
-				this.props.play(audio)
+			timer = setTimeout(() => {
+				this.props.play(audio);
+				clearTimeout(timer);
 			}, 500);
 		}
 	};
@@ -186,7 +196,9 @@ class App extends Component {
 						hasError={error != null}
 						onVolumeChange={this.handleVolumeChange}
 					/>
-					{/*@todo player search bar*/}
+					<SearchForm
+						onFilterSongs={this.handleFilterSongs}
+					/>
 					<Playlist
 						getPlaylist={songs}
 						onSongChange={this.handlePickSong}

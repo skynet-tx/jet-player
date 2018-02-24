@@ -6,13 +6,15 @@ import {
 	UPDATE_VOLUME, NEXT, PREVIOUS,
 	PLAY, SET_TIME, SET_PROGRESS,
 	TOGGLE_FAVORITE, TOGGLE_REPEAT,
-	UPDATE_POSITION, PAUSE, TOGGLE_LOOP
+	UPDATE_POSITION, PAUSE, TOGGLE_LOOP,
+	LIST_FILTER
 } from '../constants/ActionTypes'
 
 import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
 import sortBy from 'lodash/sortBy';
 import clone from 'lodash/clone';
+import trim from 'lodash/trim';
 
 const initialState = {
 	isPlaying: false,
@@ -64,6 +66,14 @@ export default function audio(state = initialState, action) {
 		case INITIALIZE:
 			const songsArray = sortBy(action.songs, ['id']);
 			return {...state, songs: songsArray, currentID: songsArray[0].id };
+		case LIST_FILTER:
+			let searchTerm = trim(action.data.searchTerm).toLowerCase();
+
+			let foundSongs = [];
+			if(searchTerm) {
+				foundSongs = state.songs.filter(song => song.title.toLowerCase().includes(trim(searchTerm)))
+			}
+			return {...state, songs: foundSongs, currentID: foundSongs[0].id };
 		case PLAY:
 		case PAUSE:
 		case ERROR:
@@ -85,7 +95,7 @@ export default function audio(state = initialState, action) {
 				...state,
 				currentID: Number(action.data.newAudioId),
 				...getAudioState(action.data.audio)
-			}
+			};
 		case UPDATE_VOLUME:
 			return {...state, volume: action.volume };
 		case SET_TIME:

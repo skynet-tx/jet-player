@@ -9,6 +9,21 @@ export function retrieveSongs() {
 	return { type: types.INITIALIZE, songs: data.songs }
 }
 
+export function filterSongs(audio, searchTerm) {
+	resetAudio(audio);
+
+	if(!searchTerm.trim()) {
+		return { type: types.INITIALIZE, songs: data.songs }
+	} else {
+		let data = {
+			audio: audio,
+			searchTerm: searchTerm
+		};
+
+		return {type: types.LIST_FILTER, data};
+	}
+}
+
 export function play(audio) {
 	if (audio.paused)
 		audio.play();
@@ -37,7 +52,7 @@ export function next(audio) {
 }
 
 export function previous(audio) {
-	resetAudio(audio)
+	resetAudio(audio);
 	return { type: types.PREVIOUS, audio }
 }
 

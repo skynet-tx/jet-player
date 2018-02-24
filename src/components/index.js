@@ -7,6 +7,7 @@ import ControlButton from './ControlButton'
 import AudioInformationPanel from './AudioInformationPanel'
 import ProgressBar from './ProgressBar'
 import Playlist from './Playlist'
+import SearchForm from './SearchForm'
 
 
 export {
@@ -15,5 +16,6 @@ export {
 	ControlButton,
 	AudioInformationPanel,
 	ProgressBar,
-	Playlist
+	Playlist,
+	SearchForm
 }

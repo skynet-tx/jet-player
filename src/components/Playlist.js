@@ -7,11 +7,6 @@ import {Segment,List} from 'semantic-ui-react'
 
 export default class Playlist extends Component {
 
-	handleOnClickByRow (ev, data) {
-		// data.children[0].key);
-		// console.log("key", data.children[0].key);
-	}
-
 	render() {
 		const songs = this.props.getPlaylist;
 
@@ -19,7 +14,7 @@ export default class Playlist extends Component {
 			<Segment>
 				<List divided relaxed >
 					{songs.map((track, index) =>
-						<List.Item key={index} onClick={this.props.onSongChange}>
+						<List.Item key={index} onClick={() => this.props.onSongChange(track.id)}>
 							<List.Icon key={track.id} name='music' size='large' verticalAlign='middle' />
 							<List.Content>
 								<List.Header as='a'>{track.artist}</List.Header>
