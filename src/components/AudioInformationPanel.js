@@ -3,11 +3,11 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-import Slider, {Range} from 'rc-slider';
+import Slider from 'rc-slider';
 
 import isFunction from 'lodash/isFunction';
 
-import {Segment, Icon, Button, Divider, Progress} from 'semantic-ui-react';
+import {Segment, Icon, Divider, Progress} from 'semantic-ui-react';
 
 const SpeakerHandle = (props) => {
 	const volumeVal = Math.max((props.offset * .96), 4).toFixed();
@@ -31,18 +31,13 @@ const SpeakerHandle = (props) => {
 export default class AudioInformationPanel extends Component {
 
 	static propTypes = {
-		title: PropTypes.string,
-		artist: PropTypes.string,
-		onVolumeChange: PropTypes.func,
-		volume: PropTypes.number,
-		hasError: PropTypes.bool
+		duration: PropTypes.number,
+		percent: PropTypes.number
 	};
 
 	static defaultProps = {
-		volume: 30,
-		hasError: false,
-		percent: 0,
-		progress: {}
+		duration: 0,
+		percent: 0
 	};
 
 	onVolumeChange = (value) => {
@@ -51,9 +46,27 @@ export default class AudioInformationPanel extends Component {
 		}
 	};
 
-	render() {
-		const {title, artist, volume, songID, hasError} = this.props;
+	str_pad_left(string,pad,length) {
+		return (new Array(length+1).join(pad)+string).slice(-length);
+	}
 
+	getTime(time) {
+		if(!time) return '00:00';
+
+		let hours = Math.floor(time / 3600);
+		let minutes = Math.floor((time - (hours*3600)) / 60);
+		let seconds = Math.floor(time % 60);
+
+		return this.str_pad_left(minutes,'0',2) + ':' + this.str_pad_left(seconds,'0',2);
+	};
+
+	getTimeFromPercentage (percent, duration) {
+		if (!percent && !duration) return '00:00';
+		return this.getTime(percent * duration);
+	}
+
+	render() {
+		const {title, artist, hasError} = this.props;
 
 		return (
 			<Segment
@@ -76,8 +89,9 @@ export default class AudioInformationPanel extends Component {
 					<Segment inverted
 							 floated="left"
 							 color='blue'>
-						<p><Icon name="sound"/>Title: "{title}"</p>
-						<p><Icon name="user"/>Artist: "{artist}"</p>
+						<p style={{margin:0}}><Icon name="sound"/>Title: "{title}"</p>
+						<p style={{margin:0}}><Icon name="user"/>Artist: "{artist}"</p>
+						<p style={{margin:0}}><Icon name="time"/>{this.getTimeFromPercentage(this.props.percent, this.props.duration)}/{this.getTime(this.props.duration)}</p>
 					</Segment>
 					<Segment inverted
 							 size="small"

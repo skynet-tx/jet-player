@@ -6,7 +6,12 @@ import ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
-import {AudioCore, ControlsPanel, AudioInformationPanel} from '../components';
+import {
+	AudioCore,
+	ControlsPanel,
+	AudioInformationPanel,
+	ProgressBar
+} from '../components';
 
 import {Container, Header, Icon, Segment} from 'semantic-ui-react'
 
@@ -29,6 +34,11 @@ class App extends Component {
 
 	handleTimeupdate = () => {
 		this.props.setTime(ReactDOM.findDOMNode(this.refs.audio));
+	};
+
+	handlePlaybackPercent =(percent) => {
+		const audio  = ReactDOM.findDOMNode(this.refs.audio);
+		audio.currentTime = (percent * audio.duration)/100;
 	};
 
 	handleError = (e) => {
@@ -97,7 +107,7 @@ class App extends Component {
 		if (this.props.audio.isRepeating) {
 			this.props.play(audio);
 		}
-	}
+	};
 
 	render() {
 		const {
@@ -119,7 +129,6 @@ class App extends Component {
 							</Header.Content>
 						</Header>
 					</Segment>
-					{/*@todo player status bar*/}
 					<AudioCore
 						ref="audio"
 						autoplay={false}
@@ -129,6 +138,10 @@ class App extends Component {
 						onError={this.handleError}
 						onEnded={this.handleEnd}
 						onLoadedData={this.handleLoadedData}/>
+
+					<ProgressBar
+						percent={percent*100}
+						onChangeProgress={this.handlePlaybackPercent}/>
 
 					<ControlsPanel
 						isPlaying={isPlaying}
@@ -149,6 +162,8 @@ class App extends Component {
 						title={song.title}
 						artist={song.artist}
 						volume={volume}
+						duration={duration}
+						percent={percent}
 						hasError={error != null}
 						onNext={this.handleNext}
 						onPrevious={this.handlePrevious}

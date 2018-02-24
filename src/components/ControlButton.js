@@ -2,21 +2,10 @@
  * Created by skynetsaa on 18.02.18.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'
 
 import {Icon, Button} from 'semantic-ui-react'
 
 export default class ControlButton extends Component {
-
-	static propTypes = {
-		mode: PropTypes.oneOf(['play', 'pause', 'next', 'previous']),
-		size: PropTypes.oneOf(['small', 'medium', 'large', 'big']),
-	};
-
-	static defaultProps = {
-		mode: 'play',
-	};
-
 
 	render() {
 

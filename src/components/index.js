@@ -5,11 +5,13 @@ import AudioCore from './AudioCore'
 import ControlsPanel from './ControlsPanel'
 import ControlButton from './ControlButton'
 import AudioInformationPanel from './AudioInformationPanel'
+import ProgressBar from './ProgressBar'
 
 
 export {
 	AudioCore,
 	ControlsPanel,
 	ControlButton,
-	AudioInformationPanel
+	AudioInformationPanel,
+	ProgressBar
 }

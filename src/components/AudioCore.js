@@ -66,7 +66,10 @@ export default class AudioCore extends Component {
 		forEach(this.state.listeners, (obj) => {
 			audio.removeEventListener(obj.event, obj.func);
 		})
-		this.state.listeners = [];
+
+		this.setState ({
+			listeners: []
+		});
 	}
 
 	componentDidMount() {
